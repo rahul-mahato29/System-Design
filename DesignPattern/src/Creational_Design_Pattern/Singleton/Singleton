@@ -1,0 +1,17 @@
+--Singleton--
+
+- The purpose of singleton is to have only one instance of a class
+- We required this singleton class in case of DB-Connection setup, or for restricting some resource.
+
+- There are different way to create a singleton class
+    1. Eager Initialization
+    2. Lazy Initialization
+    3. Synchronized Method
+    4. Double Check Locking (IMP)
+    5. Bill Pugh Solution (not-imp)
+    6. Enum (not-imp)
+
+- There are 3 main scenarios that breaks singleton
+    1. Cloning
+    2. Deserialization
+    3. Reflection
