@@ -12,7 +12,7 @@ public class DBConnection {
     public static DBConnection getInstance() {
         return DBConnectionHelper.INSTANCE_OBJECT;
     }
-}`
+}
 
 /*
 Nested class do not get loaded at the time of starting of application, so we can say it is solving the problem of 
