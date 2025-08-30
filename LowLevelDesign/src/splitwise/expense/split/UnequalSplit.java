@@ -1,4 +1,10 @@
 package splitwise.expense.split;
 
-public class UnequalSplit {
+import java.util.List;
+
+public class UnequalSplit implements SplitStrategy{
+    @Override
+    public void validateSplitRequest(List<Split> splitList, double totalAmount) {
+        //todo
+    }
 }

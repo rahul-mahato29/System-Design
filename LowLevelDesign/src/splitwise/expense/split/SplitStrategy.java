@@ -1,4 +1,7 @@
 package splitwise.expense.split;
 
-public class SplitStrategy {
+import java.util.List;
+
+public interface SplitStrategy {
+    public void validateSplitRequest(List<Split> splitList, double totalAmount);
 }
