@@ -1,5 +1,6 @@
 package splitwise.controllers;
 
+import splitwise.BalanceSheetController;
 import splitwise.expense.enums.ExpenseSplitType;
 import splitwise.entities.Expense;
 import splitwise.expense.split.Split;
@@ -10,14 +11,14 @@ import splitwise.user.User;
 import java.util.List;
 
 public class ExpenseController {
-//    BalanceSheetController balanceSheetController;
-//    public ExpenseController(){
-//        balanceSheetController = new BalanceSheetController();
-//    }
 
+    BalanceSheetController balanceSheetController;
 
-//    public ExpenseController() {
-//    }
+    //initialization through constructor
+    public ExpenseController(){
+        balanceSheetController = new BalanceSheetController();
+    }
+
 
     public Expense createExpense(String expenseId, String description, double expenseAmount, User paidByUser,
                                   ExpenseSplitType splitType, List<Split> splitDetails){
@@ -27,7 +28,7 @@ public class ExpenseController {
 
         Expense expense = new Expense( expenseId, description, expenseAmount, paidByUser, splitType, splitDetails);
 
-//        balanceSheetController.updateUserExpenseBalanceSheet(paidByUser, splitDetails, expenseAmount);
+        balanceSheetController.updateUserExpenseBalanceSheet(paidByUser, splitDetails, expenseAmount);
 
         return expense;
     }
