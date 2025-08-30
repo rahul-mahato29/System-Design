@@ -1,7 +1,13 @@
 package splitwise.controllers;
 
-import splitwise.entities.enums.ExpenseSplitType;
+import splitwise.expense.enums.ExpenseSplitType;
 import splitwise.entities.Expense;
+import splitwise.expense.split.Split;
+import splitwise.expense.SplitFactory;
+import splitwise.expense.split.SplitStrategy;
+import splitwise.user.User;
+
+import java.util.List;
 
 public class ExpenseController {
 //    BalanceSheetController balanceSheetController;
@@ -9,15 +15,19 @@ public class ExpenseController {
 //        balanceSheetController = new BalanceSheetController();
 //    }
 
-    public Expense createExpense(String expenseId, String description, double expenseAmount,
-                                 List<Split> splitDetails, ExpenseSplitType splitType, User paidByUser){
 
-        ExpenseSplit expenseSplit = SplitFactory.getSplitObject(splitType);
-        expenseSplit.validateSplitRequest(splitDetails, expenseAmount);
+//    public ExpenseController() {
+//    }
 
-        Expense expense = new Expense(expenseId, expenseAmount, description, paidByUser, splitType, splitDetails);
+    public Expense createExpense(String expenseId, String description, double expenseAmount, User paidByUser,
+                                  ExpenseSplitType splitType, List<Split> splitDetails){
 
-        balanceSheetController.updateUserExpenseBalanceSheet(paidByUser, splitDetails, expenseAmount);
+        SplitStrategy splitStrategy = SplitFactory.getSplitObject(splitType);
+        splitStrategy.validateSplitRequest(splitDetails, expenseAmount);
+
+        Expense expense = new Expense( expenseId, description, expenseAmount, paidByUser, splitType, splitDetails);
+
+//        balanceSheetController.updateUserExpenseBalanceSheet(paidByUser, splitDetails, expenseAmount);
 
         return expense;
     }

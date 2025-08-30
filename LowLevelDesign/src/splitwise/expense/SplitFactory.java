@@ -1,6 +1,10 @@
-package splitwise.expense.split;
+package splitwise.expense;
 
 import splitwise.expense.enums.ExpenseSplitType;
+import splitwise.expense.split.EqualSplit;
+import splitwise.expense.split.PercentageSplit;
+import splitwise.expense.split.SplitStrategy;
+import splitwise.expense.split.UnequalSplit;
 
 public class SplitFactory {
 

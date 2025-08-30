@@ -1,4 +1,4 @@
-package splitwise.entities.enums;
+package splitwise.expense.enums;
 
 public enum ExpenseSplitType {
     EQUAL,
