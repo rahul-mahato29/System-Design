@@ -1,4 +1,9 @@
 package ParkingLot.entities;
 
-public class Gate {
+public abstract class Gate {
+    private final int id;
+
+    protected Gate(int id) { this.id = id; }
+
+    public int getId() { return id; }
 }

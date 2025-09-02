@@ -1,4 +1,7 @@
 package ParkingLot.entities;
 
-public class ExitGate {
+public class ExitGate extends Gate{
+    public ExitGate (int id) {
+        super(id);
+    }
 }

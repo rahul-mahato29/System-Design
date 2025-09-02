@@ -1,4 +1,6 @@
 package ParkingLot.entities.enums;
 
-public class SpotType {
+public enum SpotType {
+    TWO_WHEELER,
+    FOUR_WHEELER
 }
