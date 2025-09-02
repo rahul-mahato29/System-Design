@@ -1,10 +1,6 @@
-package splitwise.expense;
+package structured_splitwise.strategies;
 
-import splitwise.expense.enums.ExpenseSplitType;
-import splitwise.expense.split.EqualSplit;
-import splitwise.expense.split.PercentageSplit;
-import splitwise.expense.split.SplitStrategy;
-import splitwise.expense.split.UnequalSplit;
+import structured_splitwise.entities.enums.ExpenseSplitType;
 
 public class SplitFactory {
 

@@ -1,4 +1,4 @@
-package splitwise;
+package structured_splitwise.entities;
 
 public class Balance {
     double amountOwe;

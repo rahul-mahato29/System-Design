@@ -1,35 +1,21 @@
-package splitwise.user;
+package structured_splitwise.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+import structured_splitwise.entities.User;
+import structured_splitwise.services.UserService;
 
 public class UserController {
 
-    List<User> userList;
+    UserService userService;
 
-    public UserController() {
-        userList = new ArrayList<>();
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    //add-user
     public void addUser(User user) {
-        userList.add(user);
+        userService.addUser(user);
     }
 
-    //getUserById
-    public User getUserById(String userID) {
-        for (User user : userList) {
-            if (user.getUserId().equals(userID)) {
-                return user;
-            }
-        }
-        return null;
+    public User getUserById(String userId) {
+        return userService.getUserById(userId);
     }
-
-    //getAllUser
-    public List<User> getAllUsers(){
-        return userList;
-    }
-
-
 }

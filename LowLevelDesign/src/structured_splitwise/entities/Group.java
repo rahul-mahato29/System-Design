@@ -1,9 +1,5 @@
-package splitwise.group;
+package structured_splitwise.entities;
 
-import splitwise.expense.enums.ExpenseSplitType;
-import splitwise.expense.split.Split;
-import splitwise.user.User;
-import splitwise.entities.Expense;
 import splitwise.controllers.ExpenseController;
 
 import java.util.ArrayList;
@@ -14,12 +10,11 @@ public class Group {
     String groupId;
     String groupName;
     List<User> groupMembers;
-
     List<Expense> expenseList;
 
     ExpenseController expenseController;  //so that I can create expense through group also
 
-    Group(){
+    public Group(){
         groupMembers = new ArrayList<>();
         expenseList = new ArrayList<>();
         expenseController = new ExpenseController();
@@ -30,24 +25,28 @@ public class Group {
         groupMembers.add(member);
     }
 
+    public void addExpense(Expense expense) {
+        expenseList.add(expense);
+    }
+
     public String getGroupId() {
         return groupId;
     }
-
     public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
-    public Expense createExpense(String expenseId, String description, double expenseAmount,
-                                 List<Split> splitDetails, ExpenseSplitType splitType, User paidByUser) {
-
-        Expense expense = expenseController.createExpense(expenseId, description, expenseAmount, paidByUser, splitType, splitDetails);
-        expenseList.add(expense);
-        return expense;
+    public List<User> getGroupMembers() {
+        return groupMembers;
     }
-
+    public List<Expense> getExpenseList() {
+        return expenseList;
+    }
 }

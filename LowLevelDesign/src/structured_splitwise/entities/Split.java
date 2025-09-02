@@ -1,13 +1,10 @@
-package splitwise.expense.split;
-
-
-import splitwise.user.User;
+package structured_splitwise.entities;
 
 public class Split {
     User user;
     double amountOwe;
 
-    public Split(User user, double amountOwe){
+    public Split(User user, double amountOwe) {
         this.user = user;
         this.amountOwe = amountOwe;
     }

@@ -1,8 +1,10 @@
-package splitwise.expense.split;
+package structured_splitwise.strategies;
+
+import structured_splitwise.entities.Split;
 
 import java.util.List;
 
-public class EqualSplit implements SplitStrategy{
+public class EqualSplit implements SplitStrategy {
     @Override
     public void validateSplitRequest(List<Split> splitList, double totalAmount) {
 

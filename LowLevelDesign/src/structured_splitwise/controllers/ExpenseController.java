@@ -1,36 +1,23 @@
-package splitwise.controllers;
+package structured_splitwise.controllers;
 
-import splitwise.BalanceSheetController;
-import splitwise.expense.enums.ExpenseSplitType;
-import splitwise.entities.Expense;
-import splitwise.expense.split.Split;
-import splitwise.expense.SplitFactory;
-import splitwise.expense.split.SplitStrategy;
-import splitwise.user.User;
+import structured_splitwise.entities.Expense;
+import structured_splitwise.entities.Split;
+import structured_splitwise.entities.User;
+import structured_splitwise.entities.enums.ExpenseSplitType;
+import structured_splitwise.services.ExpenseService;
 
 import java.util.List;
 
 public class ExpenseController {
 
-    BalanceSheetController balanceSheetController;
+    ExpenseService expenseService;
 
-    //initialization through constructor
-    public ExpenseController(){
-        balanceSheetController = new BalanceSheetController();
+    public ExpenseController(ExpenseService expenseService) {
+        this.expenseService = expenseService;
     }
-
 
     public Expense createExpense(String expenseId, String description, double expenseAmount, User paidByUser,
-                                  ExpenseSplitType splitType, List<Split> splitDetails){
-
-        SplitStrategy splitStrategy = SplitFactory.getSplitObject(splitType);
-        splitStrategy.validateSplitRequest(splitDetails, expenseAmount);
-
-        Expense expense = new Expense( expenseId, description, expenseAmount, paidByUser, splitType, splitDetails);
-
-        balanceSheetController.updateUserExpenseBalanceSheet(paidByUser, splitDetails, expenseAmount);
-
-        return expense;
+                                 ExpenseSplitType splitType, List<Split> splitDetails) {
+        return expenseService.createExpense(expenseId, description, expenseAmount, paidByUser, splitType, splitDetails);
     }
-
 }

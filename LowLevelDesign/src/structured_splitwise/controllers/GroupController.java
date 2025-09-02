@@ -1,40 +1,37 @@
-package splitwise.group;
+package structured_splitwise.controllers;
 
-import splitwise.user.User;
+import structured_splitwise.entities.Group;
+import structured_splitwise.entities.User;
+import structured_splitwise.entities.Expense;
+import structured_splitwise.entities.Split;
+import structured_splitwise.entities.enums.ExpenseSplitType;
+import structured_splitwise.services.GroupService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GroupController {
 
-    List<Group> groupList;
+    GroupService groupService;
 
-    public GroupController(){
-        groupList = new ArrayList<>();
+    public GroupController(GroupService groupService) {
+        this.groupService = groupService;
     }
 
-    //create group
     public void createNewGroup(String groupId, String groupName, User createdByUser) {
-
-        //create a new group
-        Group group = new Group();
-        group.setGroupId(groupId);
-        group.setGroupName(groupName);
-
-        //add the user into the group, as it is created by the USER
-        group.addMember(createdByUser);
-
-        //add the group in the list of overall groups
-        groupList.add(group);
+        groupService.createNewGroup(groupId, groupName, createdByUser);
     }
 
-    public Group getGroup(String groupId){
-        for(Group group: groupList) {
-            if(group.getGroupId().equals(groupId)){
-                return group;
-            }
-        }
-        return null;
+    public Group getGroup(String groupId) {
+        return groupService.getGroup(groupId);
+    }
+
+    public void addMember(String groupId, User user) {
+        groupService.addMemberToGroup(groupId, user);
+    }
+
+    public Expense createExpense(String groupId, String expenseId, String description, double amount,
+                                 List<Split> splits, ExpenseSplitType splitType, User paidByUser) {
+        return groupService.createExpenseInGroup(groupId, expenseId, description, amount, splits, splitType, paidByUser);
     }
 
 }

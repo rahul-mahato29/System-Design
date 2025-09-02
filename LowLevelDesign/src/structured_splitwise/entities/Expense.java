@@ -1,8 +1,7 @@
-package splitwise.entities;
+package structured_splitwise.entities;
 
-import splitwise.expense.enums.ExpenseSplitType;
-import splitwise.expense.split.Split;
-import splitwise.user.User;
+
+import structured_splitwise.entities.enums.ExpenseSplitType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,51 @@ public class Expense {
         this.splitDetails = splitDetails;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setExpenseAmount(double expenseAmount) {
+        this.expenseAmount = expenseAmount;
+    }
+
+    public void setExpenseId(String expenseId) {
+        this.expenseId = expenseId;
+    }
+
+    public void setPaidByUser(User paidByUser) {
+        this.paidByUser = paidByUser;
+    }
+
+    public void setSplitDetails(List<Split> splitDetails) {
+        this.splitDetails = splitDetails;
+    }
+
+    public void setSplitType(ExpenseSplitType splitType) {
+        this.splitType = splitType;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public double getExpenseAmount() {
+        return expenseAmount;
+    }
+
+    public String getExpenseId() {
+        return expenseId;
+    }
+
+    public User getPaidByUser() {
+        return paidByUser;
+    }
+
+    public List<Split> getSplitDetails() {
+        return splitDetails;
+    }
+
+    public ExpenseSplitType getSplitType() {
+        return splitType;
     }
 }

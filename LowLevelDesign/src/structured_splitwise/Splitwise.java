@@ -1,64 +1,64 @@
-package splitwise;
+package structured_splitwise;
 
-import splitwise.controllers.ExpenseController;
-import splitwise.expense.enums.ExpenseSplitType;
-import splitwise.expense.split.Split;
-import splitwise.group.Group;
-import splitwise.group.GroupController;
-import splitwise.user.User;
-import splitwise.user.UserController;
+import structured_splitwise.controllers.BalanceSheetController;
+import structured_splitwise.controllers.ExpenseController;
+import structured_splitwise.entities.Expense;
+import structured_splitwise.entities.enums.ExpenseSplitType;
+import structured_splitwise.entities.Split;
+import structured_splitwise.controllers.GroupController;
+import structured_splitwise.entities.User;
+import structured_splitwise.controllers.UserController;
+import structured_splitwise.repositories.GroupRepository;
+import structured_splitwise.repositories.UserRepository;
+import structured_splitwise.services.BalanceSheetService;
+import structured_splitwise.services.ExpenseService;
+import structured_splitwise.services.GroupService;
+import structured_splitwise.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Splitwise {
 
-    ExpenseController expenseController;
-    UserController userController;
-    GroupController groupController;
-    BalanceSheetController balanceSheetController;
+    //repositories
+    GroupRepository groupRepository = new GroupRepository();
+    UserRepository userRepository = new UserRepository();
 
-    Splitwise(){
-        userController = new UserController();
-        expenseController = new ExpenseController();
-        groupController = new GroupController();
-        balanceSheetController = new BalanceSheetController();
-    }
+    //services
+    BalanceSheetService balanceSheetService = new BalanceSheetService();
+    GroupService groupService = new GroupService(groupRepository);
+    ExpenseService expenseService = new ExpenseService();
+    UserService userService = new UserService(userRepository);
 
+    //controllers
+    UserController userController = new UserController(userService);
+    GroupController groupController = new GroupController(groupService);
+    ExpenseController expenseController = new ExpenseController(expenseService);
+    BalanceSheetController balanceSheetController = new BalanceSheetController();
 
+    //API-Call-From-Controller : Postman
     public void demo() {
 
         setUpUser();
 
-        //step-1: create & add member to the group
-        Group group = groupController.getGroup("G1");
-        group.addMember(userController.getUserById("U1"));
-        group.addMember(userController.getUserById("U2"));
-        group.addMember(userController.getUserById("U3"));
-        group.addMember(userController.getUserById("U4"));
+        // Step 1: create & add members to group
+        groupController.addMember("G1",userController.getUserById("U1"));
+        groupController.addMember("G1", userController.getUserById("U2"));
+        groupController.addMember("G1", userController.getUserById("U3"));
+        groupController.addMember("G1", userController.getUserById("U4"));
 
-        //step-2: create split of expense
-        System.out.println("Testing Group Creation");
+        // Step 2: split details
         List<Split> splitDetails = new ArrayList<>();
-        Split split1 = new Split(userController.getUserById("U1"), 200);
-        Split split2 = new Split(userController.getUserById("U2"), 200);
-        Split split4 = new Split(userController.getUserById("U3"), 200);
-        Split split3 = new Split(userController.getUserById("U4"), 200);
+        splitDetails.add(new Split(userController.getUserById("U1"), 200));
+        splitDetails.add(new Split(userController.getUserById("U2"), 200));
+        splitDetails.add(new Split(userController.getUserById("U3"), 200));
+        splitDetails.add(new Split(userController.getUserById("U4"), 200));
 
-        splitDetails.add(split1);
-        splitDetails.add(split2);
-        splitDetails.add(split3);
-        splitDetails.add(split4);
-
-        //checking creation of Expense
-//        expenseController.createExpense("Exp1", "Lunch", 400, userController.getUserById("U1"), ExpenseSplitType.EQUAL, splitDetails );
-
-        //step-3: group expense creation and add split
-        group.createExpense("Exp2", "Dinner", 800,  splitDetails, ExpenseSplitType.EQUAL, userController.getUserById("U1"));
+        // Step 3: create expense in group
+        groupController.createExpense("G1", "Exp2", "Dinner", 800, splitDetails,
+                ExpenseSplitType.EQUAL, userController.getUserById("U1"));
 
         System.out.println("Successfully Expense Created");
-
-        //show balance sheet of user - u1
         balanceSheetController.showBalanceSheetOfUser(userController.getUserById("U1"));
     }
 
@@ -73,7 +73,6 @@ public class Splitwise {
     }
 
     public void addUserToSplitwise() {
-
         //adding User
         User user1 = new User("User1", "U1");
         User user2 = new User("User2", "U2");
@@ -85,6 +84,4 @@ public class Splitwise {
         userController.addUser(user3);
         userController.addUser(user4);
     }
-
-
 }

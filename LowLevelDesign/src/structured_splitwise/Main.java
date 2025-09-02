@@ -1,4 +1,4 @@
-package splitwise;
+package structured_splitwise;
 
 public class Main {
 

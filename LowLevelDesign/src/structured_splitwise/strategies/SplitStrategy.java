@@ -1,4 +1,6 @@
-package splitwise.expense.split;
+package structured_splitwise.strategies;
+
+import structured_splitwise.entities.Split;
 
 import java.util.List;
 
