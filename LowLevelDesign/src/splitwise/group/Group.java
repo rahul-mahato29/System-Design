@@ -19,7 +19,7 @@ public class Group {
 
     ExpenseController expenseController;  //so that I can create expense through group also
 
-    Group(){
+    public Group(){
         groupMembers = new ArrayList<>();
         expenseList = new ArrayList<>();
         expenseController = new ExpenseController();

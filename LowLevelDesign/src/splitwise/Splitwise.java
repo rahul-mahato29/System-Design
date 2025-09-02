@@ -18,7 +18,7 @@ public class Splitwise {
     GroupController groupController;
     BalanceSheetController balanceSheetController;
 
-    Splitwise(){
+    public Splitwise(){
         userController = new UserController();
         expenseController = new ExpenseController();
         groupController = new GroupController();
@@ -30,14 +30,14 @@ public class Splitwise {
 
         setUpUser();
 
-        //step-1: add member to the group
+        //step-1: create & add member to the group
         Group group = groupController.getGroup("G1");
         group.addMember(userController.getUserById("U1"));
         group.addMember(userController.getUserById("U2"));
         group.addMember(userController.getUserById("U3"));
         group.addMember(userController.getUserById("U4"));
 
-        //step-2: create an expense inside a group
+        //step-2: create split of expense
         System.out.println("Testing Group Creation");
         List<Split> splitDetails = new ArrayList<>();
         Split split1 = new Split(userController.getUserById("U1"), 200);
@@ -53,7 +53,7 @@ public class Splitwise {
         //checking creation of Expense
 //        expenseController.createExpense("Exp1", "Lunch", 400, userController.getUserById("U1"), ExpenseSplitType.EQUAL, splitDetails );
 
-        //group expense creation
+        //step-3: group expense creation and add split
         group.createExpense("Exp2", "Dinner", 800,  splitDetails, ExpenseSplitType.EQUAL, userController.getUserById("U1"));
 
         System.out.println("Successfully Expense Created");
