@@ -1,6 +1,11 @@
 package BookMyShow;
 
-public class Threatre {
+import BookMyShow.Enums.City;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Theatre {
 
     int theatreId;
     String address;
